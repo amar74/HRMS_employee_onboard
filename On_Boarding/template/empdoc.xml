@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="Onboarding_empdoc_details" model="mail.template">
+          <field name="name">Employee_Documents</field>
+                <!-- '.email' used only in related field -->
+          <field name="email_from">${(user.email )|safe}</field>
+          <field name="subject">Employee Documents Deatils</field>
+          <field name="email_to">${object.empmail_id|safe}</field>
+          <field name="model_id" ref="On_Boarding.model_onboard_employee"/>
+          <field name="auto_delete" eval="False"/>
+          <field name="body_html">
+            <![CDATA[
+              <p>Dear <br/><br/>
+
+                Employee Name:-			    ${object.name} <br/> <br/>
+
+		Employee Non-Disclosure-Agreenent:- 
+	
+	<a href= "/web/content?model=onboard.employee&field=Non_disclosure_agreement&id=${object.id}"> Download </a>  <br/>
+
+                Employee Agreement:-                
+	
+	<a href= "/web/content?model=onboard.employee&field=Employee_agreement&id=${object.id}"> Download </a>  <br/>
+
+                Employee Anti-Sexual Agreement:-    
+
+	<a href= "/web/content?model=onboard.employee&field=anti_Sexual&id=${object.id}"> Download </a>  <br/>
+
+                Employee Ethics-Policy:-            
+
+	<a href= "/web/content?model=onboard.employee&field=Ethics_policy&id=${object.id}"> Download </a> <br/>
+
+                Employee ESOPs:-                    
+	
+	<a href= "web/content?model=onboard.employee&field=ESOPs&id=${object.id}"> Download </a> <br/>
+
+                Employee PF Form:-                  
+	
+	<a href= "/web/content?model=onboard.employee&field=PF_form&id=${object.id}"> Download </a> <br/>
+
+		Employee Gratuity Form:-            
+
+	<a href= "/web/content?model=onboard.employee&field=Gratuity_form&id=${object.id}"> Download </a> <br/> <br>
+
+	<a href="localhost:8069/web/content?model=onboard.employee&amp;field=Non_disclosure_agreement&amp;id=${object.id}"> Download </a>
+	
+	<br/></p>
+             
+	      Regards,<br/>
+              HR Team              
+            ]]>
+          </field>
+       </record>
+    </data>
+</odoo>

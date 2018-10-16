@@ -1,0 +1,284 @@
+<?xml version="1.0" ?>
+<odoo>
+  <record id="employee_form_view" model="ir.ui.view">
+                <field name="name">Employee_Details_Wizard</field>
+                <field name="model">onboard.employee</field>
+		<field name="type">form</field>
+                <field name="arch" type="xml">
+	
+	<form>
+	<header>
+	  <div>
+	    <button string="Employee Information" type="object" 
+		    name="employee_info"  
+		    attrs="{'invisible': [('state', '!=', 'employee_info')]}" />
+
+	    <button string="Documents" type="object"
+		    name="documents"  
+		    attrs="{'invisible': [('state','!=','documents')]}" />
+
+	    <button string="Assets" type="object" 
+		    name="assets"  
+		    attrs="{'invisible': [('state','!=','assets')]}" />
+
+	    <button string="Admin" type="object" name="admin" 
+		    attrs="{'invisible': [('state','!=','admin')]}" />
+	   
+	    <field name="state"  widget="statusbar" />
+	 </div>
+	</header>
+	<!-- FORM -->
+            <form>
+	    <sheet>
+	<!-- BUTTONS -->
+	 	<header>
+	        	
+		<button string="Information" type="object"
+			name="employee_info" class="oe_highlight"
+			groups="hr.group_hr_manager"  
+			attrs="{'invisible': [('state', '=', 'employee_info')]}" />
+		
+		<button string="Documents" type="object" 
+			name="documents" class="oe_highlight"
+			groups="hr.group_hr_user" 
+			attrs="{'invisible': [('state', '=', 'documents')]}" />
+
+		<button string="Assets" type="object" name="assets" 
+			groups="base.group_user" class="oe_highlight"
+			attrs="{'invisible': [('state', '=', 'assets')]}" />
+
+		<button string="Admin" type="object" name="admin" 
+			groups="hr.group_hr_manager" class="oe_highlight"
+			attrs="{'invisible': [('state', '=', 'admin')]}" /> 
+	
+
+		</header>
+	
+	<!--  EMPLOYEE INFORMATION SHEET -->
+		<sheet name="employee_info" groups="hr.group_hr_manager" 
+		       attrs="{'invisible': [('state', '!=', 'employee_info')]}">
+               
+
+                <group string="Employee Information">
+           
+		<group>
+                <field name="name" placeholder="Enter Name" 
+		       style=" max-width: 1150px;  width: 170px;" />
+
+                <field name="position" placeholder="Select Position" 
+		       style="max-width: 1150px; width: 170px;" />
+	
+                <field name="department" placeholder="Select Department" 
+		       style="max-width:1150px; width: 170px;" />
+
+                <field name="parent" placeholder="Select Manger" 
+		       domain="[('department_id','=',department)]"  
+		       style="max-width: 1150px; width: 170px;"  />
+
+		<field name="user_id" placeholder="Select User" class="oe_edit_only" />
+		       	
+		</group>
+	
+		<group name="public" string="">
+
+                <field name="doj" placeholder="D.O.J" 
+		       class="oe_inline"
+		       style="max-width: 1150px; width: 170px;" />
+	
+                <field name="salary" placeholder="salary" />
+		      
+
+                <field name="empmail_id"  placeholder="Personal Email ID" 
+		       style="max-width: 1150px; width: 170px;" />
+
+		<field name="phone"  placeholder="Mobile No"
+		       style="max-width: 1150px; width: 170px" />
+		
+	
+		 <field name="employee_id" placeholder="Select Employee" 
+			string="Employee" class="oe_edit_only" />	
+
+		</group>
+	<!--	<t t-foreach="Employee" t-as="Employee">
+		   <tr> <td> Employee:</td> 
+			<td> <span t-esc="Employee.name" /> </td>  </tr> -->
+		</group>
+		<footer class="oe_left">
+		  <group col="3">
+			<button name="next" string="Next" type="object" 
+				class="btn-primary" groups="hr.group_hr_manager" 
+				attrs="{'invisible':[('state','!=','employee_info')]}" />
+		  		 
+			<button name="mail" string="Send Mail" type="object" 
+				class="btn-primary" groups="hr.group_hr_manager" />
+	
+                        <button name="submit" string="save" type="object" 
+                                class="oe_edit_only" groups="hr.group_hr_manager"  />
+  		
+	<!--		<a t-attf-href="/employee/view" class="btn btn-info">Employee</a>      -->          
+		  </group>	              
+                </footer>               	
+		</sheet>
+		
+	<!-- EMPLOYEE DOCUMENTS SHEET -->
+		 <sheet name="documents" 
+			groups="hr.group_hr_user" 
+			attrs="{'invisible': [('state','!=','documents')]}">
+		
+		<group name="documents"  
+		       string="Employee Documents">	
+
+		<group string="">
+		<field name="Non_disclosure_agreement" 
+		       widget="document" class="oe_avatar" 
+		       filename="NDA"	/>
+		<field name="NDA" invisible="1" />
+
+		<field name="Employee_agreement" 
+		       widget="document" class="oe_avatar"  filename="Emp_A" />
+		<field name="Emp_A" invisible="1" />
+
+		<field name="anti_Sexual" 
+		       widget="document" class="oe_avatar" filename="Anti_S" />
+		<field name="Anti_S" invisible="1" />
+		
+		</group>
+
+		<group string="">
+
+                <field name="Ethics_policy"
+		       widget="binary" 
+		       class="oe_avatar" filename="ET_P" />
+		<field name="ET_P" invisible="1" />
+
+                <field name="ESOPs"
+		       widget="binary"
+		       class="oe_avatar" filename="ESOP" />
+		<field name="ESOP" invisible="1" />
+
+                <field name="PF_form"
+		       widget="binary"
+		       class="oe_avatar" filename="PF_f" />
+		<field name="PF_f" invisible="1" />
+
+                <field name="Gratuity_form" 
+		       widget="binary"
+                       class="oe_avatar" filename="GF" />
+		<field name="GF" invisible="1" />
+		
+		</group>
+
+		<footer> 
+		   <group col="3">
+		        <button name="next1" string="Next" type="object" 
+				class="btn-primary" groups="hr.group_hr_manager" 
+				attrs="{'invisible': [('state','!=','documents')]}" />
+			<button name="sav" string="Save" type="object"
+				class="btn-primary" groups="hr.group_hr_user"
+				attrs="{'invisible': [('state','=','documents')]}" />
+			<button name="maild" string="Mail" type="object"
+	                        class="btn-primary" groups="hr.group_hr_manager" />
+		   </group>
+
+
+		</footer>
+		</group>
+		</sheet>
+
+	<!-- EMPLOYEE ASSETS SHEETS -->
+		<sheet name="assets" 
+		       string="Assets" 
+		       groups="base.group_user" 
+		       attrs="{'invisible': [('state','!=','assets')]}" >
+	
+                <group name="Other_Deatils" 
+		       string="Tracking Details">
+
+                <field name="mac" type="checkbox" /> 
+                <field name="Laptop" type="checkbox"/>
+                <field name="Desktop" type="checkbox" />
+                <field name="Thinkpad" type="checkbox" />
+                <field name="sim" type="checkbox"/>
+		
+		<footer>
+		<group col="2">
+                  <button name="next2" string="Next" type="object" 
+			  class="btn-primary" groups="hr.group_hr_manager"  
+			  style="max-width:1150px; width:150px;" />      
+		
+		  <button name="sav1" string="Save" type="objecctc"
+			  class="btn-primary" groups="base.group_user" /> 
+	 	</group>     
+		</footer>
+                </group>
+		</sheet>
+
+	<!-- EMPLOYEE ADMIN SHEET -->
+		<sheet name="admin" sting="Admin" 
+		       groups="hr.group_hr_manager"
+		       attrs="{'invisible': [('state','!=','admin')]}">
+		<group name="Admin" string="Admin">
+ 
+		<field name="bussiness" type="checkbox" />
+                <field name="parking" type="checkbox" />
+
+		<footer>
+		<group col="2">
+		<button name="save" string="Save" type="object" 
+			class="btn-primary" groups="hr.group_hr_manager" />
+		</group>
+		</footer>
+		</group>
+		</sheet>
+		</sheet>
+		</form>
+		</form>	
+		</field> 
+	
+ </record>
+
+<!-- END FORM RECORD !!!!! -->
+
+
+<!-- TREE VIEW -->
+	<record model="ir.ui.view" id="employee_tree_view" >
+        <field name="name">Employee Details</field>
+        <field name="model">onboard.employee</field>
+        <field name="arch" type="xml"> 
+          
+	
+	 <tree>
+				<field name="name"/>
+                <field name="position"/>
+                <field name="department" />
+                <field name="parent"/>
+                <field name="doj" />
+                <field name="salary"/>
+                <field name="empmail_id" />
+				<field name="phone" />
+				<field name="Non_disclosure_agreement"/>
+				<field name="Employee_agreement"/>
+				<field name="anti_Sexual"/>
+				<field name="Ethics_policy"/>
+				<field name="ESOPs"/>
+				<field name="PF_form"/>
+				<field name="Gratuity_form"/>
+
+	    </tree>
+	</field>
+	</record>
+
+	<record id="custom_action" model="ir.actions.act_window">
+        <field name="name">Employee Details</field>
+        <field name="res_model">onboard.employee</field>
+    
+	 <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to create new item !
+            </p>
+        </field>
+    </record>
+    <!--   Create Top Menu  -->
+    <menuitem name="On Board" id="custom_top_menu" action="custom_action" sequence="7"/>
+	
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_user_rule,Employee_Details_Wizard,model_onboard_employee,base.group_user,1,1,0,0
+acess_employee_officer_rule,Employee,model_onboard_employee,hr.group_hr_user,1,1,0,0
+access_employee_manager_rule,Employee,model_onboard_employee,hr.group_hr_manager,1,1,1,0

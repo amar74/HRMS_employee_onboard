@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+   <data>  
+	<!-- If want update when module update use ("noupdate="1/0") 1 for update and 0 for not updtae -->
+
+	<record id="employee_user_rule" model="ir.rule">
+		<field name="name">Employee Documents</field>
+		<field name="model_id" ref="model_onboard_employee" />
+		<field name="domain_force">
+			[('id', '=', user.id)]
+		</field>
+		<field name="groups" eval="[(4, ref('base.group_user'))]" />
+	</record>
+
+	<record id="employee_officer_rule" model="ir.rule">
+                <field name="name">Employee Task only for Officer</field>
+                <field name="model_id" ref="model_onboard_employee" />
+                <field name="domain_force">
+                        ['|',('id', '=', user.id), ('parent', '=', user.id)]
+                </field>
+                <field name="groups" eval="[(4, ref('hr.group_hr_user'))]" /> 
+
+        </record>
+
+	<record id="employee_manager_rule" model="ir.rule">
+		<field name="name">Employee Task only for manager</field>
+		<field name="model_id" ref="model_onboard_employee" />
+		<field name="domain_force">
+			[(1, '=', 1)]
+		</field>
+		<field name="groups" eval="[(4, ref('hr.group_hr_manager'))]" /> 
+
+	</record>
+
+  </data>
+</odoo>

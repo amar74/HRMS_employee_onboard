@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="Onboarding_employee_details" model="mail.template">
+          <field name="name">Employee</field>
+                <!-- '.email' used only in related field -->
+          <field name="email_from">${(user.email )|safe}</field>
+          <field name="subject">Employee Deatils</field>
+          <field name="email_to">amarnathswhh1995@gmail.com</field>
+          <field name="model_id" ref="On_Boarding.model_onboard_employee"/>
+          <field name="auto_delete" eval="False"/>
+          <field name="body_html">
+            <![CDATA[
+              <p>Dear <br/>
+				
+		              Employee Name:-	        ${(object.name)} <br/>
+                  Employee Position:-     ${object.position.name} <br/>
+                  Employee Department:-   ${object.department.name} <br/>
+       s           Employee Manager:-      ${object.parent.name} <br/>
+                  Employee Joining Date:- ${object.doj} <br/>
+                  Employee Salary:-       ${object.salary} <br/>
+                  Employee E-mail:-       ${object.empmail_id} <br/>
+                  Employee Phone no.:-    ${object.phone} <br/>
+
+              <br/></p>
+              Regards,<br/>
+ 	      HR Team              
+            ]]>
+          </field> 
+       </record>
+    </data>
+</odoo>
